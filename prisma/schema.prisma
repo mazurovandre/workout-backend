@@ -14,17 +14,17 @@ datasource db {
 }
 
 model Exercise {
-  id    Int     @default(autoincrement()) @id
-  title String
-  description String
+  id           Int    @id @default(autoincrement())
+  title        String
+  description  String
   muscle_group String
 }
 
 model Training {
-  id    Int     @default(autoincrement()) @id
+  id          Int    @id @default(autoincrement())
   exercise_id Int
-  sets  Int
-  reps  Int
-  weight  Int
-  comment String
+  sets        Int
+  reps        Int
+  weight      Int
+  comment     String
 }
