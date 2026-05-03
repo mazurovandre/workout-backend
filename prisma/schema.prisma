@@ -13,18 +13,8 @@ datasource db {
   provider = "postgresql"
 }
 
-model Exercise {
-  id           Int    @id @default(autoincrement())
-  title        String
-  description  String
-  muscle_group String
-}
-
-model Training {
-  id          Int    @id @default(autoincrement())
-  exercise_id Int
-  sets        Int
-  reps        Int
-  weight      Int
-  comment     String
+model exercise {
+  id      String @id @default(uuid()) @db.Uuid
+  name    String
+  content String
 }
