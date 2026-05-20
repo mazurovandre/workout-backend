@@ -14,7 +14,18 @@ datasource db {
 }
 
 model exercise {
-  id      String @id @default(uuid()) @db.Uuid
-  name    String
-  content String
+  id          String @id @default(uuid()) @db.Uuid
+  name        String
+  content     String?
+  muscleGroup muscleGroup
+}
+
+enum muscleGroup {
+  CHEST
+  BACK
+  SHOULDERS
+  BICEPS
+  TRICEPS
+  LEGS
+  ABS
 }

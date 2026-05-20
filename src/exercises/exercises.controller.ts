@@ -1,16 +1,16 @@
 import {
+  Body,
   Controller,
+  Delete,
   Get,
   Param,
+  Patch,
   Post,
-  Body,
-  Delete,
-  Put,
 } from '@nestjs/common';
-import { ExercisesService } from './exercises.service';
 import { exercise } from 'generated/prisma/client';
 import { CreateExerciseDto } from './dto/create-exercise.dto';
 import { UpdateExerciseDto } from './dto/update-exercise.dto';
+import { ExercisesService } from './exercises.service';
 
 @Controller('exercises')
 export class ExercisesController {
@@ -31,7 +31,7 @@ export class ExercisesController {
     return this.exercisesService.create(data);
   }
 
-  @Put(':id')
+  @Patch(':id')
   update(@Param('id') id: string, @Body() data: UpdateExerciseDto) {
     return this.exercisesService.update(id, data);
   }
