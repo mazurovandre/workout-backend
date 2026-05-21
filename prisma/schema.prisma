@@ -14,10 +14,47 @@ datasource db {
 }
 
 model exercise {
+  id               String @id @default(uuid()) @db.Uuid
+  name             String
+  content          String?
+  muscleGroup      muscleGroup
+  workoutExercises workoutExercise[] @relation("ExerciseWorkouts")
+  programs         program[] @relation("ProgramExercises")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt @default(now())
+}
+
+model workout {
   id          String @id @default(uuid()) @db.Uuid
   name        String
-  content     String?
-  muscleGroup muscleGroup
+  description String?
+  exercises   workoutExercise[] @relation("WorkoutExercises")
+  date        DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt @default(now())
+}
+
+model program {
+  id          String @id @default(uuid()) @db.Uuid
+  name        String
+  description String?
+  exercises   exercise[] @relation("ProgramExercises")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt @default(now())
+}
+
+model workoutExercise {
+  id          String @id @default(uuid()) @db.Uuid
+  workout     workout  @relation("WorkoutExercises", fields: [workoutId], references: [id])
+  workoutId   String   @db.Uuid
+  exercise    exercise @relation("ExerciseWorkouts", fields: [exerciseId], references: [id])
+  exerciseId  String   @db.Uuid
+  sets        Int
+  reps        Int
+  weight      Float
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt @default(now())
 }
 
 enum muscleGroup {
